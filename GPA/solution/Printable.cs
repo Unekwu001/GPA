@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
 
 namespace GPA.solution
 {
-    internal class PrintTable
+    public class PrintTable
     {
         //declaration of variables used.
         public string print_all = "";
@@ -64,31 +60,30 @@ namespace GPA.solution
                         Console.Write($"Enter course {counter}:  ");
                         course = Console.ReadLine();
                         if (course=="q" || course == "Q") { System.Environment.Exit(0); }
-                    } while (course == "");
+                    } while (course == "" );
+                    //!Regex.IsMatch(course, @"^[A-Za-z0-9]$")
 
-                    
+
+
                     do
                     {
                         Console.Clear();
                         Console.Write($"Press 'q' to exit console.\n\n");
-                        Console.Write($"Enter the course unit for  {course}:   ");
+                        Console.Write($"Ensure the course unit for  {course} is within range 1 - 5:   ");
                         rawcourseunit = Console.ReadLine();
-                        if (rawcourseunit == "q" || course == "Q") { System.Environment.Exit(0); }
-                        courseUnit = int.Parse(rawcourseunit);
-                        
-                    } while (!int.TryParse(rawcourseunit, out num ) || courseUnit < 0 || courseUnit > 5 );
-                    
+                        if (rawcourseunit == "q" || rawcourseunit == "Q") { System.Environment.Exit(0); }
+                    } while (!int.TryParse(rawcourseunit, out num ) || (int.Parse(rawcourseunit) < 1) || (int.Parse(rawcourseunit) > 5) );
+                     courseUnit = int.Parse (rawcourseunit);                                       
 
 
-
-                    do
+                  do
                     {
                         Console.Clear();
                         Console.Write($"Press 'q' to exit console.\n\n");
-                        Console.Write($"enter the score of {course}:  ");
+                        Console.Write($"Ensure the score of {course} is within range 0 - 100:  ");
                         rawscore = Console.ReadLine();
                         if (rawscore == "q" || rawscore == "Q") { System.Environment.Exit(0); }
-                    } while (!Double.TryParse(rawscore, out num2));
+                    } while (!Double.TryParse(rawscore, out num2) || double.Parse(rawscore) < 0 || double.Parse(rawscore) > 100);
                     actualScore = Convert.ToDouble(rawscore);
 
 
@@ -136,6 +131,7 @@ namespace GPA.solution
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("The inputed Number is out of range");
                         break;
                     }
@@ -161,9 +157,8 @@ namespace GPA.solution
 
                 //GPA FORMULAR
                 gpa = totalWeightPoint / totalCourseUnitRegistered;
-
-
                 //printing all 
+                Console.Clear() ;
                 Console.WriteLine(" |------------------|-----------------|-----------|---------------|---------------|--------------|");
                 Console.WriteLine(" | COURSE & CODE    | COURSE UNIT     | GRADE     | GRADE-UNIT    | WEIGHT Pt     | REMARK       |");
                 Console.WriteLine(" |------------------|-----------------|-----------|---------------|---------------|--------------|");
@@ -174,7 +169,7 @@ namespace GPA.solution
                 Console.WriteLine($"GPA is {gpa:F2}");
             }
             catch ( Exception e ) { Console.WriteLine(e.Message); }
-            finally { Console.WriteLine("So sorry you had hitches using our app, Kindly try again. Thank you !"); }
+            finally { Console.WriteLine("\nThanks for using our GPA app!.\nPlease donot forget to visit our website for more useful apps at theo-neku@netlify.app. ");  }
             }
 
     }
