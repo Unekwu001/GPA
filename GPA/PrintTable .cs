@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 
 
-namespace GPA.solution
+namespace GPA
 {
     public class PrintTable
     {
@@ -28,44 +27,34 @@ namespace GPA.solution
 
         public void MyTable()
         {
-            //Receiving the number of courses the user would want to check.
-            //The do while will keep running until user inputs an integer.
+            
+            // Each do-while loop will keep running until the user inputs the correct datatype.
             try {
-
                 do
                 {
                     Console.Clear();
+                    //This do-while loop receives the number of courses 
                     Console.Write("Hello and welcome to your favourite GPA CALCULATOR, Please Input the number of courses you would like to check:NOTE!\nYou would only proceed if your input is a number.Thank you !\n Input it Here:      ");
                     n = Console.ReadLine();
                 }
                 while (!int.TryParse(n, out num));
-
-
                 //converting the above input to integer
                 int totalcourses = int.Parse(n);
 
-
-                //the counter helps to make the app more interactive.
                 int counter = 1;
-
-
-                //the length of the loop is determined by the user's input above. 
-                //all do-while loops below will ensure the code keeps requesting for the correct user input and will not proceed until the correct datatype is supplied
                 for (int i = 0; i < totalcourses; i++)
                 {
-                    do
+                    do   //This do-while loop for course code
                     {
                         Console.Clear();
                         Console.Write($"Press 'q' to exit console.\n\n");
+                        
                         Console.Write($"Enter course {counter}:  ");
                         course = Console.ReadLine();
                         if (course=="q" || course == "Q") { System.Environment.Exit(0); }
                     } while (course == "" );
-                    //!Regex.IsMatch(course, @"^[A-Za-z0-9]$")
 
-
-
-                    do
+                    do  //  do-while loop for course unit
                     {
                         Console.Clear();
                         Console.Write($"Press 'q' to exit console.\n\n");
@@ -73,10 +62,10 @@ namespace GPA.solution
                         rawcourseunit = Console.ReadLine();
                         if (rawcourseunit == "q" || rawcourseunit == "Q") { System.Environment.Exit(0); }
                     } while (!int.TryParse(rawcourseunit, out num ) || (int.Parse(rawcourseunit) < 1) || (int.Parse(rawcourseunit) > 5) );
-                     courseUnit = int.Parse (rawcourseunit);                                       
+                     courseUnit = int.Parse (rawcourseunit);
 
 
-                  do
+                    do   //  do-while loop for course score
                     {
                         Console.Clear();
                         Console.Write($"Press 'q' to exit console.\n\n");
@@ -87,6 +76,7 @@ namespace GPA.solution
                     actualScore = Convert.ToDouble(rawscore);
 
 
+                    // if-statement to grade scores
                     if (actualScore >= 70 && actualScore <= 100)
                     {
                         grade = 'A';
@@ -167,10 +157,11 @@ namespace GPA.solution
                 Console.WriteLine($"Total course Unit passed is {totalCourseUnitPassed}");
                 Console.WriteLine($"Total Weight point is {totalWeightPoint}");
                 Console.WriteLine($"GPA is {gpa:F2}");
+               
             }
             catch ( Exception e ) { Console.WriteLine(e.Message); }
-            finally { Console.WriteLine("\nThanks for using our GPA app!.\nPlease donot forget to visit our website for more useful apps at theo-neku@netlify.app. ");  }
-            }
+            finally { Console.WriteLine("\nThanks for using our GPA app!.\nPlease donot forget to visit our website for more useful apps at theo-neku@netlify.app. ");}
+        }
 
     }
 }
