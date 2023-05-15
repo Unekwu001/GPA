@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace GPA
 {
     public class PrintTable
@@ -24,10 +23,8 @@ namespace GPA
         private double num2;
         public string rawcourseunit,rawscore;
 
-
         public void MyTable()
-        {
-            
+        {            
             // Each do-while loop will keep running until the user inputs the correct datatype.
             try {
                 do
